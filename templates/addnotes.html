@@ -1,0 +1,36 @@
+{% extends 'dashboard.html' %}
+{% block addcss %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% endblock %}
+    {% block content %}
+<!-- <style>
+    body{
+        background-image: url("https://img.freepik.com/free-photo/vivid-blurred-colorful-wallpaper-background_58702-3798.jpg?semt=ais_hybrid");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    a{
+        text-decoration: none;
+        color: whitesmoke;
+        border: 1px solid rgba(128, 0, 128, 0.84);
+        border-radius: 25px;
+        background-color: rgba(128, 0, 128, 0.84);
+        padding: 10px 10px;
+    }
+</style> -->
+<body>
+    <h2>NOTES</h2>
+    <form method="POST">
+        <input type="text" name="title" placeholder="Enter title">
+        <p>
+            <!-- <a href=""><i class="fa-solid fa-pen"></i>Create Notes</a> -->
+            <textarea name="desc" id="desc" placeholder="You can write your notes here..." class="description"></textarea>
+        </p>
+        <p>
+            <button>Submit</button>
+        </p>
+    </form>
+    {% endblock %}

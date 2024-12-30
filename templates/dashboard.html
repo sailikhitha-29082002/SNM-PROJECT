@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Bar</title>
+  {% block addcss %}{% endblock %}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: aquamarine;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: pink;
+      padding: 0.5em 1em;
+    }
+    .navbar a, .logout-button {
+      color: white;
+      text-decoration: none;
+      padding: 0.5em 1em;
+    }
+    .navbar a:hover, .logout-button:hover {
+      background-color: #575757;
+      border-radius: 5px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #444444;
+      min-width: 150px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: white;
+      padding: 0.5em 1em;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #d3dae8;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .search-bar input {
+      padding: 0.5em;
+      border: none;
+      border-radius: 5px;
+    }
+    .logout-button {
+      background-color: #f44336;
+      border: none;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      color: pink;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><h3>{{message}}</h3></center>
+    {%endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+  
+  <nav class="navbar">
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a href="{{url_for('dashboard')}}">Home</a>
+      <a href="{{url_for('getexceldata')}}">Get exceldata</a>
+      
+      
+      <!-- Dropdown 1 -->
+      <div class="dropdown">
+        <a href="#dropdown1">Notes</a>
+        <div class="dropdown-content">
+
+          <a href="{{url_for('addnotes')}}">Add notes</a>
+          <a href="{{url_for('viewallnotes')}}">View all notes</a>
+        </div>
+      </div>
+      
+      <!-- Dropdown 2 -->
+      <div class="dropdown">
+        <a href="#dropdown2">Files</a>
+        <div class="dropdown-content">
+          <a href="{{url_for('uploadfile')}}">uploadfile</a>
+          <a href="{{url_for('viewallfiles')}}">View all files</a>
+          <a href="#option6">Option 3</a>
+        </div>
+      </div>
+    </div>
+    {{session.get('user')}}
+    <form action="{{url_for('search')}}" method="POST">
+    <div class="search-bar">
+      <input type="text" placeholder="Search..." name="sname">
+      <button>search</button>
+      <a href="{{url_for('logout')}}">Logout
+      </a>
+    </div>
+    
+    </form>
+  </nav>
+</body>
+{% block content %}{% endblock %}
+{% if sdata %}
+    <table>
+        <thead>
+            <tr>
+            <th>notes id</th>
+            <th>title</th>
+            <th>Description</th>
+            <th>created at</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in sdata %}
+            <tr>
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                <td>{{i[2]}}</td>
+                <td>{{i[3]}}</td>
+                <td><a href="{{url_for('viewnotes',nid=i[0])}}">View</a></td>
+                <td><a href="{{url_for('deletenotes',nid=i[0])}}">delete</a></td>
+                <td><a href="{{url_for('updatenotes',nid=i[0])}}">update</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+</html>
