@@ -9,22 +9,22 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: aquamarine;
+      background-color: rgb(241, 207, 207);
     }
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: pink;
+      background-color: rgb(115, 116, 111);
       padding: 0.5em 1em;
     }
     .navbar a, .logout-button {
-      color: white;
+      color: rgb(255, 255, 255);
       text-decoration: none;
       padding: 0.5em 1em;
     }
     .navbar a:hover, .logout-button:hover {
-      background-color: #575757;
+      background-color: #e51212;
       border-radius: 5px;
     }
     .nav-links {
@@ -65,11 +65,11 @@
       border-radius: 5px;
     }
     .logout-button {
-      background-color: #f44336;
+      background-color: #46eac4;
       border: none;
       padding: 0.5em 1em;
       cursor: pointer;
-      color: pink;
+      color: rgb(233, 13, 50);
       border-radius: 5px;
     }
   </style>
@@ -106,7 +106,7 @@
         <div class="dropdown-content">
           <a href="{{url_for('uploadfile')}}">uploadfile</a>
           <a href="{{url_for('viewallfiles')}}">View all files</a>
-          <a href="#option6">Option 3</a>
+          <!-- <a href="#option6">Option 3</a> -->
         </div>
       </div>
     </div>

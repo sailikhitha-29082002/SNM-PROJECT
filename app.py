@@ -92,6 +92,13 @@ def login():
         else:
             return 'something went wrong'                
     return render_template('login.html') 
+@app.route('/adminlogout')
+def adminlogout():
+    if session.get('admin'):
+        session.pop('admin')
+        return redirect(url_for('login'))
+    else:
+        return redirect(url_for('login'))
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html')   
@@ -217,12 +224,13 @@ def viewallfiles():
     else:
         return render_template('allfiles.html',fdata=fdata)
 
-@app.route('/viewfile/<fid>')
-def viewfile(fid):
+@app.route('/viewfile/<nid>/<fid>')
+def viewfile(nid,fid):
     try:
         cursor=mydb.cursor(buffered=True)
-        cursor.execute('select filename,fdata from filedata where fid=%s',[fid])
+        cursor.execute('select filename,fdata from filedata where fid=%s',[nid])
         fdata=cursor.fetchone() # (1,python,'jhgvb',2024-12-14 12:37:18)
+        print(fdata)
         bytes_data=BytesIO(fdata[1])
         return send_file(bytes_data,download_name=fdata[0],as_attachment=False)
     except Exception as e:

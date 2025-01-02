@@ -20,7 +20,7 @@
                 <td>{{i[0]}}</td>
                 <td>{{i[1]}}</td>
                 <td>{{i[2]}}</td>
-                <td><a href="{{url_for('viewfile',fid=i[0])}}">View</a></td>
+                <td><a href="{{url_for('viewfile',fid=i[0],nid=i[0])}}">View</a></td>
                 <td><a href="{{url_for('deletefile',fid=i[0])}}">delete</a></td>
                 <td><a href="{{url_for('downloadfile',fid=i[0])}}">downlode</a></td>
             </tr>
